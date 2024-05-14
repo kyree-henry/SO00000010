@@ -18,6 +18,7 @@ namespace SO00000010.Infrastructure
             services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
             services.AddScoped<IProgramRepository, ProgramRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             return services;
         }
