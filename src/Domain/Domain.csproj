@@ -9,10 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Entities\" />
     <Folder Include="Mappers\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
 
   <ItemGroup>
