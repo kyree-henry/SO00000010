@@ -17,8 +17,10 @@ namespace SO00000010.Infrastructure
             services.AddScoped<IDataContext>(provider => provider.GetRequiredService<DataContext>());
             services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<IProgramRepository, ProgramRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IApplicationRecordRepository, ApplicationRecordRepository>();
 
             return services;
         }
