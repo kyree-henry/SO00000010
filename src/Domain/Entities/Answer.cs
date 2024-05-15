@@ -7,8 +7,5 @@
 
         public Guid QuestionId { get; set; }
         public virtual Question? Question { get; set; }
-
-        public Guid ApplicationId { get; set; }
-        public virtual ApplicationRecord? Application { get; set; }
     }
 }

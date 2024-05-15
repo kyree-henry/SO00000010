@@ -21,8 +21,8 @@ namespace SO00000010.Infrastructure.Extensions
             await ServiceProviderServiceExtensions.GetRequiredService<HealthCheckService>(scope.ServiceProvider).CheckHealthAsync();
 
             // Migrate Database
-            //DataContext? context = ServiceProviderServiceExtensions.GetRequiredService<DataContext>(scope.ServiceProvider);
-            //await context?.Database?.MigrateAsync()!;
+            DataContext? context = ServiceProviderServiceExtensions.GetRequiredService<DataContext>(scope.ServiceProvider);
+            await context?.Database?.MigrateAsync()!;
 
             // Initialize Database Seed
             //IDatabaseSeeder service = ServiceProviderServiceExtensions.GetService<IDatabaseSeeder>(scope.ServiceProvider)!;

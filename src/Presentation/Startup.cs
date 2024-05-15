@@ -1,4 +1,8 @@
-﻿namespace SO00000010.Presentation
+﻿using SO00000010.Application;
+using SO00000010.Domain;
+using SO00000010.Infrastructure;
+
+namespace SO00000010.Presentation
 {
     public class Startup
     {
@@ -11,7 +15,12 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDatabaseServices();
+
+            services.AddDomain();
+            services.AddApplication();
             services.AddMvcServices();
+            services.AddInfrastructure();
             services.AddSwaggerServices();
             services.AddHealthCheckServices();
         }

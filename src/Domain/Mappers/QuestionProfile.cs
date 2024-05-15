@@ -4,16 +4,13 @@ using SO00000010.Domain.Entities;
 
 namespace SO00000010.Domain.Mappers
 {
-    internal class QuestionProfile : Profile
+    public class QuestionProfile : Profile
     {
         public QuestionProfile()
         {
             CreateMap<QuestionModel, Question>().ReverseMap();
 
-            CreateMap<UpdateQuestionModel, Question>()
-                .ForMember(dest => dest.Choices, opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Choices)))
-                .ReverseMap()
-                .ForMember(dest => dest.Choices, opt => opt.MapFrom(src => src.ListOfChoices));
+            CreateMap<UpdateQuestionModel, Question>().ReverseMap();
 
             CreateMap<CreateQuestionModel, Question>()
                 .ForMember(dest => dest.Choices, opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Choices)))

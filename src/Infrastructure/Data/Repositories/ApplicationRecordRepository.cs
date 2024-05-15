@@ -22,7 +22,7 @@ namespace SO00000010.Infrastructure.Data.Repositories
 
         public async Task<ApplicationRecordModel> GetByIdAsync(Guid id)
         {
-            ApplicationRecord? applicationrecord = await _context.Applications.Include(a => a.Program).SingleOrDefaultAsync(a => a.Id == id);
+            ApplicationRecord? applicationrecord = await _context.Applications.SingleOrDefaultAsync(a => a.Id == id);
             return applicationrecord is not null ? _mapper.Map<ApplicationRecordModel>(applicationrecord) : default!;
         }
 

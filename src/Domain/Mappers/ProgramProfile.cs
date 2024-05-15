@@ -7,13 +7,15 @@ namespace SO00000010.Domain.Mappers
     {
         public ProgramProfile()
         {
-            CreateMap<CreateProgramModel, Program>().ReverseMap()
+            CreateMap<UpdateProgramModel, Program>().ReverseMap()
                 .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
 
-            CreateMap<UpdateProgramModel, Program>().ReverseMap();
+            CreateMap<CreateProgramModel, Program>().ReverseMap();
 
-            CreateMap<ProgramModel, Program>().ReverseMap()
-                .ForMember(dest => dest.ApplicationRecords, opt => opt.MapFrom(src => src.Applications))
+            CreateMap<Program, ProgramModel>().ReverseMap()
+                .ForMember(dest => dest.Applications, opt => opt.MapFrom(src => src.ApplicationRecords));
+
+            CreateMap<CreateProgramAndApplicationModel, Program>()
                 .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.Questions));
         }
     }

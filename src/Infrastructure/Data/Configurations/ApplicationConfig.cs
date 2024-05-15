@@ -7,10 +7,7 @@ namespace SO00000010.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ApplicationRecord> entity)
         {
-            entity.HasOne(ap => ap.Program)
-            .WithMany(p => p.Applications)
-            .HasForeignKey(ap => ap.ProgramId)
-            .OnDelete(DeleteBehavior.Cascade);
+            //entity.HasKey(ap => ap.ProgramId);
         }
     }
 }

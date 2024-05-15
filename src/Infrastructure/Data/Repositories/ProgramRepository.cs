@@ -13,7 +13,7 @@ namespace SO00000010.Infrastructure.Data.Repositories
             _context = context;
             _mapper = mapper;
         }
-        
+
         public async Task<IEnumerable<ProgramModel>> GetAsync()
         {
             IEnumerable<Program>? programs = await _context.Programs.ToListAsync();
@@ -35,9 +35,30 @@ namespace SO00000010.Infrastructure.Data.Repositories
             return result > 0 ? _mapper.Map<ProgramModel>(program) : default!;
         }
 
+        public async Task<bool> CreateProgramAndApplication(CreateProgramAndApplicationModel data, CancellationToken cancellationToken)
+        {
+            Program program = _mapper.Map<Program>(data);
+            program.Id = Guid.NewGuid();
+            if (program.Questions!.Any())
+            {
+                foreach (Question q in program.Questions!)
+                {
+                    q.ProgramId = program.Id;
+                }
+            }
+            _context.Programs.Add(program);
+
+            ApplicationRecord applicationrecord = _mapper.Map<ApplicationRecord>(data);
+            applicationrecord.ProgramId = program.Id;
+            _context.Applications.Add(applicationrecord);
+
+            int result = await _context.SaveChangesAsync(cancellationToken);
+            return result > 0;
+        }
+
         public async Task<ProgramModel> UpdateAsync(UpdateProgramModel data, CancellationToken cancellationToken)
         {
-            Program program = await _context.Programs.Include(a => a.Questions).SingleOrDefaultAsync(a => a.Id == data.Id) 
+            Program program = await _context.Programs.Include(a => a.Questions).SingleOrDefaultAsync(a => a.Id == data.Id)
                             ?? throw new SO00000010Exception("Program not found!");
 
             _mapper.Map(data, program);

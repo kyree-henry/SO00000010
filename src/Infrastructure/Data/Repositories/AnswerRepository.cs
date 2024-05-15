@@ -22,7 +22,7 @@ namespace SO00000010.Infrastructure.Data.Repositories
 
         public async Task<AnswerModel> GetByIdAsync(Guid id)
         {
-            Answer? answer = await _context.Answers.Include(a => a.Application).SingleOrDefaultAsync(a => a.Id == id);
+            Answer? answer = await _context.Answers.Include(a => a.Question).SingleOrDefaultAsync(a => a.Id == id);
             return answer is not null ? _mapper.Map<AnswerModel>(answer) : default!;
         }
 

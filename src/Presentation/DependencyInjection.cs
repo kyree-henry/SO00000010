@@ -1,12 +1,19 @@
 ﻿using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using SO00000010.Application.Interfaces.Services;
+using SO00000010.Presentation.Data;
 using SO00000010.Presentation.Data.Swagger;
 
 namespace SO00000010.Presentation
 {
     public static class DependencyInjection
     {
+        public static IServiceCollection AddDatabaseServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IDatabaseConfiguration, DatabaseConfiguration>();
+            return services;
+        }
 
         public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
         {
@@ -14,31 +21,6 @@ namespace SO00000010.Presentation
             {
                 c.EnableAnnotations();
                 c.OperationFilter<SwaggerDefaultValues>();
-                c.AddSecurityDefinition("Bearer", new()
-                {
-                    Description = @"Enter 'Bearer' [Space] and your token",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-                c.AddSecurityRequirement(new()
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new ()
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header
-                        },
-                        new List<string>()
-                    }
-                });
             });
 
             services.ConfigureOptions<ConfigureSwaggerOptions>();

@@ -7,9 +7,9 @@ namespace SO00000010.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Question> entity)
         {
-            entity.HasOne(q => q.Program)
-            .WithMany(p => p.Questions)
-            .HasForeignKey(q => q.ProgramId)
+            entity.HasMany(q => q.Answers)
+            .WithOne(p => p.Question)
+            .HasForeignKey(q => q.QuestionId)
             .OnDelete(DeleteBehavior.Cascade);
         }
     }

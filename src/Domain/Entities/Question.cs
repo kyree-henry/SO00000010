@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SO00000010.Domain.Enums;
 
 namespace SO00000010.Domain.Entities
 {
@@ -6,14 +7,13 @@ namespace SO00000010.Domain.Entities
     {
         public Guid Id { get; set; }
         public string Text { get; set; } = default!;
-
+        public QuestionType Type { get; set; }
         public bool AllowOtherOption { get; set; }
         public int MaxChoice { get; set; }
 
         public string? Choices { get; set; }
 
         public Guid ProgramId { get; set; }
-        public virtual Program Program { get; set; } = default!;
 
         public virtual ICollection<Answer>? Answers { get; set; }
 
